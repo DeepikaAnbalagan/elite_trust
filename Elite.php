@@ -28,7 +28,7 @@
 <body>
   <div class="container">
 <div class="main">
-<form class="form" name="myform" method="post" onsubmit="return medical()">
+<form class="form" name="myform" method="post" onsubmit="return medical()" enctype="multipart/form-data">
             <div class="wrapper">
                     <div class="row">
                     <div class="col-lg-12 mb-5">
@@ -452,6 +452,37 @@
        
         <!-- <script src="dummymedical.js"></script> -->
         <script src="student application.js"></script>
+        <script>
+      
+      $(document).ready(function (){
+  
+      $('#form_sub').click(function(event){
+      event.preventDefault();
+      alert('ok');
+      var file_image = $('#user_image').prop('files')[0];
+      alert(file_image);
+      var formdata =new FormData(document.getElementById('subform'));
+      formdata.append('file',file_image);
+      alert(formdata);
+      
+  
+   
+          $.ajax({
+          url: 'insert.php',
+          data: formdata,
+          processData: false,
+          contentType: false,
+          type: 'POST',
+          success: function(data){
+              alert(data);
+          }
+          });
+   
+  
+    
+  });
+  });
+  </script>
   
 </body>
 </html>
