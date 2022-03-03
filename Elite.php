@@ -28,7 +28,7 @@
 <body>
   <div class="container">
 <div class="main">
-<form class="form" name="myform" method="post" onsubmit="return medical()">
+<form class="form" name="myform" method="post" id="formdata" onsubmit="return medical()">
             <div class="wrapper">
                     <div class="row">
                     <div class="col-lg-12 mb-5">
@@ -48,15 +48,15 @@
                     </div>
                     <div id="toggle1">
                         <div class="row">
+                             <input type="hidden" name="id" id="id" value="">
                             <div class="fullname col-lg-4">
                                 <label for="fullname" class="text-dark">Full Name</label>
                                 <input id="fullname" type="text" class="form-control" name="fullname">
                             </div>  
                             <div class="dob col-md-12 col-lg-4 col-xl-4">
                                 <label for="d_o_admission">Date Of Birth</label>
-                                <input id="d_o_admission" class="form-control date" name="dob" placeholder="Select date...">
-                                 
-                             </div>
+                                <input id="d_o_admission" class="form-control "  type="date" name="dob" placeholder="Select date...">
+                            </div>
                             <div class="gender col-lg-4">
                                 <label for="gender">Gender</label>
                                 <div class="row">
@@ -435,7 +435,7 @@
                         </div>
                         </div>
                         <div class="submit">
-                           <button type="submit" name="submit"  class="btn btn-primary">Submit1</button>
+                           <button type="submit" name="submit"  id="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -453,6 +453,34 @@
        
         <!-- <script src="dummymedical.js"></script> -->
         <script src="student application.js"></script>
+
+        <script>
+$('#submit').on('click',function(e){
+   
+          e.preventDefault();
+         alert('aa');
+        //   var file_data = $('#user_imag').prop('files')[0];
+     
+            var formdata = new FormData(document.getElementById('formdata'));
+         //  form_data.append('file',file_data);
+       $.ajax({
+            url:'insert.php',
+            contentType: false,
+            cache: false,
+            processData:false,
+            type:"post",
+            data: formdata,
+            success:function(result){
+            console.log(result);
+            // alert($result);
+            document.getElementById("formdata").reset();
+            // location.href = 'testimonial_table.php';
+            },
+            // error: function(){}
+            });
+
+            });;
+                </script> 
   
 </body>
 </html>
